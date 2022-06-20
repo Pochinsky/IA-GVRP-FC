@@ -1,24 +1,37 @@
-# define compiler
+# Define compiler
 CC = g++
-
-# define compiler flags:
-CFLAGS = -g -Wall -o
-
-# define the main build target
-TARGET = main
-
+# Define compiler flags:
+CFLAGS = -c -Wall
+# Define code files
+CODE1 = main.cpp
+CODE2 = src/extract/extract.cpp
+# Define object files
+OBJ1 = main.o
+OBJ2 = extract.o
+# Define executable
+EXE = main.out
+# To clean
 RM = rm -f
 
-# compile target
-all: $(TARGET)
+# compile program
+all: extract main executable
 
-$(TARGET): $(TARGET).cpp
-	$(CC) $(CFLAGS) $(TARGET).out $(TARGET).cpp
+# compile executable
+executable: $(OBJ1) $(OBJ2)
+	$(CC) $(OBJ1) $(OBJ2) -o $(EXE)
 
-# execute target
+# compile main
+main: $(CODE1)
+	$(CC) $(CFLAGS) $(CODE1)
+
+# compile extract module
+extract: $(CODE2)
+	$(CC) $(CFLAGS) $(CODE2)
+
+# run executable
 run:
-	./$(TARGET).out
+	./$(EXE)
 
 # clean .o files
 clean:
-	$(RM) $(TARGET).out
+	$(RM) $(OBJ1) $(OBJ2)
