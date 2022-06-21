@@ -3,6 +3,12 @@
 /**
  * Constructor of Node class
  */
+Node::Node() {
+	setId(-1);
+	setType('t');
+	setLongitude(0.0);
+	setLatitude(0.0);
+}
 Node::Node(int i, char t, double lo, double la) {
 	setId(i);
 	setType(t);

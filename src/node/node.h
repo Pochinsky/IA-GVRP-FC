@@ -6,6 +6,7 @@ class Node {
 		double latitude;
 	public:
 		// constructor
+		Node();
 		Node(int i, char t, double lo, double la);
 		// setters
 		void setId(int i);
