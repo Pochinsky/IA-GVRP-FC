@@ -1,11 +1,11 @@
-#include "instance.h"
 #include <fstream>
 #include <cstring>
+#include "instance.h"
 
 using namespace std;
 
 /**
- * Constructor of Instance Class
+ * Constructor of Instance class
  */
 Instance::Instance(int c, int s, int mt, int md, int sp, int st, int rt) {
 	setCustomers(c);
@@ -18,50 +18,33 @@ Instance::Instance(int c, int s, int mt, int md, int sp, int st, int rt) {
 }
 
 /**
- * Setters of Instance Class
+ * Setters of Instance class
  */
-void Instance::setCustomers(int c) {
-	customers = c;
-}
+void Instance::setCustomers(int c) { customers = c; }
+void Instance::setStations(int s) {	stations = s; }
+void Instance::setMaxtime(int mt) {	maxtime = mt; }
+void Instance::setMaxdistance(int md) {	maxdistance = md; }
+void Instance::setSpeed(int sp) {	speed = sp; }
+void Instance::setServicetime(int st) { servicetime = st; }
+void Instance::setRefueltime(int rt) { refueltime = rt; }
 
-void Instance::setStations(int s) {
-	stations = s;
-}
-
-void Instance::setMaxtime(int mt) {
-	maxtime = mt;
-}
-
-void Instance::setMaxdistance(int md) {
-	maxdistance = md;
-}
-
-void Instance::setSpeed(int sp) {
-	speed = sp;
-}
-
-void Instance::setServicetime(int st) {
-	servicetime = st;
-}
-
-void Instance::setRefueltime(int rt) {
-	refueltime = rt;
-}
-
+/**
+ * Getters of Instance class
+ */
 int Instance::getCustomers() { return customers; }
-
 int Instance::getStations() { return stations; }
-
 int Instance::getMaxtime() { return maxtime; }
-
 int Instance::getMaxdistance() { return maxdistance; }
-
 int Instance::getSpeed() { return speed; }
-
 int Instance::getServicetime() { return servicetime; }
-
 int Instance::getRefueltime() { return refueltime; }
 
+/**
+ * @brief extract data of instance and save in a Instance object
+ * 
+ * @param filename name of file to open
+ * @return Instance object that storage data of instance
+ */
 Instance extractInstanceData(string filename) {
 	/**
 	 * Define variables and
