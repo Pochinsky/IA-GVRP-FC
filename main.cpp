@@ -1,18 +1,14 @@
 #include <iostream>
 #include <fstream>
+#include <vector>
 #include "src/instance/instance.h"
+#include "src/list/list.h"
 
 using namespace std;
 
 int main() {
-	string filename = "./Instancias/AB218.dat";
+	string filename      = "./Instancias/AB101.dat";
 	Instance newInstance = extractInstanceData(filename);
-	cout << "customers:   " << newInstance.getCustomers()   << endl;
-	cout << "stations:    " << newInstance.getStations()    << endl;
-	cout << "maxtime:     " << newInstance.getMaxtime()     << endl;
-	cout << "maxdistance: " << newInstance.getMaxdistance() << endl;
-	cout << "speed:       " << newInstance.getSpeed()       << endl;
-	cout << "servicetime: " << newInstance.getServicetime() << endl;
-	cout << "refueltime:  " << newInstance.getRefueltime()  << endl;
+	vector<Node> nodes 	 = extractNodes(filename);
 	return 0;
 }
