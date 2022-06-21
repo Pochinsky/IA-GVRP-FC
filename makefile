@@ -4,10 +4,10 @@ CC = g++
 CFLAGS = -c -Wall
 # Define code files
 CODE1 = main.cpp
-CODE2 = src/extract/extract.cpp
+CODE2 = src/instance/instance.cpp
 # Define object files
 OBJ1 = main.o
-OBJ2 = extract.o
+OBJ2 = instance.o
 # Define executable
 EXE = main.out
 # To clean
