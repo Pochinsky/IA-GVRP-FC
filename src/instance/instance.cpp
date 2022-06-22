@@ -7,14 +7,14 @@ using namespace std;
 /**
  * Constructor of Instance class
  */
-Instance::Instance(int c, int s, int mt, int md, int sp, int st, int rt) {
+Instance::Instance(int c, int s, double mt, double md, double sp, int st, int rt) {
 	setCustomers(c);
 	setStations(s);
-	setMaxtime(mt);
-	setMaxdistance(md);
+	setMaxTime(mt);
+	setMaxDistance(md);
 	setSpeed(sp);
-	setServicetime(st);
-	setRefueltime(rt);
+	setServiceTime(st);
+	setRefuelTime(rt);
 }
 
 /**
@@ -22,22 +22,22 @@ Instance::Instance(int c, int s, int mt, int md, int sp, int st, int rt) {
  */
 void Instance::setCustomers(int c) { customers = c; }
 void Instance::setStations(int s) {	stations = s; }
-void Instance::setMaxtime(int mt) {	maxtime = mt; }
-void Instance::setMaxdistance(int md) {	maxdistance = md; }
-void Instance::setSpeed(int sp) {	speed = sp; }
-void Instance::setServicetime(int st) { servicetime = st; }
-void Instance::setRefueltime(int rt) { refueltime = rt; }
+void Instance::setMaxTime(double mt) {	maxTime = mt; }
+void Instance::setMaxDistance(double md) {	maxDistance = md; }
+void Instance::setSpeed(double sp) {	speed = sp; }
+void Instance::setServiceTime(int st) { serviceTime = st; }
+void Instance::setRefuelTime(int rt) { refuelTime = rt; }
 
 /**
  * Getters of Instance class
  */
 int Instance::getCustomers() { return customers; }
 int Instance::getStations() { return stations; }
-int Instance::getMaxtime() { return maxtime; }
-int Instance::getMaxdistance() { return maxdistance; }
+int Instance::getMaxTime() { return maxTime; }
+int Instance::getMaxDistance() { return maxDistance; }
 int Instance::getSpeed() { return speed; }
-int Instance::getServicetime() { return servicetime; }
-int Instance::getRefueltime() { return refueltime; }
+int Instance::getServiceTime() { return serviceTime; }
+int Instance::getRefuelTime() { return refuelTime; }
 
 /**
  * @brief extract data of instance and save in a Instance object
@@ -45,49 +45,50 @@ int Instance::getRefueltime() { return refueltime; }
  * @param filename name of file to open
  * @return Instance object that storage data of instance
  */
-Instance extractInstanceData(string filename) {
+Instance extractInstanceData(string fileName) {
 	/**
 	 * Define variables and
 	 * open the file
 	 */
-	ifstream inputfile;
+	ifstream inputFile;
 	string line;
 	int
 		customers, 
 		stations, 
-		maxtime, 
-		maxdistance, 
-		speed,
-		servicetime, 
-		refueltime;
-	inputfile.open(filename,ios::in);
-	if (!inputfile.is_open()) {
-		cerr << "No se pudo abrir el archivo: " << filename << endl;
+		serviceTime, 
+		refuelTime;
+	double
+		maxTime,
+		maxDistance, 
+		speed;
+	inputFile.open(fileName,ios::in);
+	if (!inputFile.is_open()) {
+		cerr << "No se pudo abrir el archivo: " << fileName << endl;
 		abort();
 	}
 	/**
 	 * Get info of instance
 	 */
-	getline(inputfile,line);
-	inputfile.close();
+	getline(inputFile,line);
+	inputFile.close();
 	if (line[8] == '1')
 		customers = stoi(line.substr(8,3));
 	else
 		customers = stoi(line.substr(9,2));
 	stations 		= stoi(line.substr(14,2));
-	maxtime 		= stoi(line.substr(19,3));
-	maxdistance	= stoi(line.substr(25,3));
-	speed 			= stoi(line.substr(32,10));
-	servicetime	= stoi(line.substr(45,2));
-	refueltime	= stoi(line.substr(50,2));
+	maxTime 		= stod(line.substr(19,3));
+	maxDistance	= stod(line.substr(25,3));
+	speed 			= stod(line.substr(32,10));
+	serviceTime	= stoi(line.substr(45,2));
+	refuelTime	= stoi(line.substr(50,2));
 	Instance newInstance(
 		customers,
 		stations,
-		maxtime,
-		maxdistance,
+		maxTime,
+		maxDistance,
 		speed,
-		servicetime,
-		refueltime
+		serviceTime,
+		refuelTime
 	);
 	return newInstance;
 }

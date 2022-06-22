@@ -4,4 +4,4 @@
 
 using namespace std;
 
-vector<Node> extractNodes(string filename);
+vector<Node> extractNodes(string fileName);

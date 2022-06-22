@@ -15,5 +15,6 @@ class Memory {
 };
 
 double toRadians(double degrees);
-double haversineDistance(Node n1, Node n2);
+double haversineDistance(double longitude1, double longitude2, double latitude1, double latitude2);
+double calculateTimeInTravel(double speed, double distance);
 void forwardChecking(Instance instance, vector<Node> nodes);

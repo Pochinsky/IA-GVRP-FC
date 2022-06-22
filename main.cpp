@@ -6,9 +6,9 @@
 using namespace std;
 
 int main() {
-	string filename      = "./Instancias/AB101.dat";
-	Instance newInstance = extractInstanceData(filename);
-	vector<Node> nodes 	 = extractNodes(filename);
+	string fileName      = "./Instancias/AB101.dat";
+	Instance newInstance = extractInstanceData(fileName);
+	vector<Node> nodes 	 = extractNodes(fileName);
 	forwardChecking(newInstance,nodes);
 	return 0;
 }

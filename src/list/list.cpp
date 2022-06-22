@@ -4,42 +4,42 @@
 #include <bits/stdc++.h>
 #include "list.h"
 
-vector<Node> extractNodes(string filename) {
+vector<Node> extractNodes(string fileName) {
 	/**
 	 * Define variables and
 	 * open the file
 	 */
-	ifstream inputfile;
+	ifstream inputFile;
 	string line;
 	int id, n = 0;
 	char type;
 	double longitude, latitude;
-	inputfile.open(filename,ios::in);
-	if (!inputfile.is_open()) {
-		cerr << "No se pudo abrir el archivo: " << filename << endl;
+	inputFile.open(fileName,ios::in);
+	if (!inputFile.is_open()) {
+		cerr << "No se pudo abrir el archivo: " << fileName << endl;
 		abort();
 	}
 	/**
 	 * Get number of nodes
 	 */
-	getline(inputfile,line);
+	getline(inputFile,line);
 	while (true) {
-		getline(inputfile,line);
+		getline(inputFile,line);
 		if (line.size() == 1) break;
 		if (line.size() == 42) n++;
 	}
-	inputfile.close();
+	inputFile.close();
 	/**
 	 * Get nodes
 	 */
-	inputfile.open(filename,ios::in);
-	if (!inputfile.is_open()) {
-		cerr << "No se pudo abrir el archivo: " << filename << endl;
+	inputFile.open(fileName,ios::in);
+	if (!inputFile.is_open()) {
+		cerr << "No se pudo abrir el archivo: " << fileName << endl;
 		abort();
 	}
 	vector<Node> nodes;
 	while (true) {
-		getline(inputfile,line);
+		getline(inputFile,line);
 		if (line.size() == 1) break;
 		if (line.size() == 42) {
 			if (line[1] == ' ')

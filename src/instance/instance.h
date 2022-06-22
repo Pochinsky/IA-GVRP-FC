@@ -6,30 +6,30 @@ class Instance {
 	private:
 		int customers;
 		int stations;
-		int maxtime;
-		int maxdistance;
-		int speed;
-		int servicetime;
-		int refueltime;
+		double maxTime;
+		double maxDistance;
+		double speed;
+		int serviceTime;
+		int refuelTime;
 	public:
 		// constructor
-		Instance(int c, int s, int mt, int md, int sp, int st, int rt);
+		Instance(int c, int s, double mt, double md, double sp, int st, int rt);
 		// setters
 		void setCustomers(int c);
 		void setStations(int s);
-		void setMaxtime(int mt);
-		void setMaxdistance(int md);
-		void setSpeed(int sp);
-		void setServicetime(int st);
-		void setRefueltime(int rt);
+		void setMaxTime(double mt);
+		void setMaxDistance(double md);
+		void setSpeed(double sp);
+		void setServiceTime(int st);
+		void setRefuelTime(int rt);
 		// getters
 		int getCustomers();
 		int getStations();
-		int getMaxtime();
-		int getMaxdistance();
+		int getMaxTime();
+		int getMaxDistance();
 		int getSpeed();
-		int getServicetime();
-		int getRefueltime();
+		int getServiceTime();
+		int getRefuelTime();
 };
 
-Instance extractInstanceData(string filename);
+Instance extractInstanceData(string fileName);
