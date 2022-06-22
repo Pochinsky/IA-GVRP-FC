@@ -5,7 +5,6 @@
 Filter::Filter(
 	vector<Node> ss, 
 	vector<Node> nfss, 
-	vector<vector<Node>> moi,
 	Node d, 
 	Node cn
 ) {

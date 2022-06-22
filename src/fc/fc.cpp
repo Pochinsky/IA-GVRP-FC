@@ -35,6 +35,10 @@ void forwardChecking(
 	vector<Node> refuelNodes,
 	vector<Node> customerNodes
 ) {
+	// solution variables
+	double solutionQuality = 0; // [mile]
+	int costumersAttended  = 0;
+	int vehicles 					 = 0;
 	// helpers variables
 	double currentTimeAvailable     = maxTime;
 	double currentTankAvailable     = maxDistance;
@@ -44,7 +48,8 @@ void forwardChecking(
 	vector<Filter> memoryRefuel;
 	vector<Filter> memoryCustomers;
 	// forward checking in action
-	// while () {
-		
-	// }
+	// example to first iteration
+	// 1. filtrar
+	Filter refuel(refuelNodes,notFilterRefuel,depot,currentNode);
+	Filter customers(customerNodes,notFilterCustomers,depot,currentNode);
 }

@@ -6,22 +6,24 @@ CFLAGS = -c -Wall
 CODE1 = main.cpp
 CODE2 = src/instance/instance.cpp
 CODE3 = src/node/node.cpp
-CODE4 = src/list/list.cpp
-CODE5 = src/fc/fc.cpp
+CODE4 = src/nodes/nodes.cpp
+CODE5 = src/filter/filter.cpp
+CODE6 = src/fc/fc.cpp
 # Define object files
 OBJ1 = main.o
 OBJ2 = instance.o
 OBJ3 = node.o
-OBJ4 = list.o
-OBJ5 = fc.o
-ALLOBJ = $(OBJ1) $(OBJ2) $(OBJ3) $(OBJ4) $(OBJ5)
+OBJ4 = nodes.o
+OBJ5 = filter.o
+OBJ6 = fc.o
+ALLOBJ = $(OBJ1) $(OBJ2) $(OBJ3) $(OBJ4) $(OBJ5) $(OBJ6)
 # Define executable
 EXE = main.out
 # To clean
 RM = rm -f
 
 # compile program
-all: instance node list fc main executable
+all: instance node nodes filter fc main executable
 
 # compile executable
 executable: $(ALLOBJ)
@@ -39,13 +41,17 @@ instance: $(CODE2)
 node: $(CODE3)
 	$(CC) $(CFLAGS) $(CODE3)
 
-# compile list module
-list: $(CODE4)
+# compile nodes module
+nodes: $(CODE4)
 	$(CC) $(CFLAGS) $(CODE4)
 
-# compile fc module
-fc: $(CODE5)
+# compile filter module
+filter: $(CODE6)
 	$(CC) $(CFLAGS) $(CODE5)
+
+# compile fc module
+fc: $(CODE6)
+	$(CC) $(CFLAGS) $(CODE6)
 
 # run executable
 run:
