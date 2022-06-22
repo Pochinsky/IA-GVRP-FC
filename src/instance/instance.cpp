@@ -7,7 +7,7 @@ using namespace std;
 /**
  * Constructor of Instance class
  */
-Instance::Instance(int c, int s, double mt, double md, double sp, int st, int rt) {
+Instance::Instance(int c, int s, double mt, double md, double sp, double st, double rt) {
 	setCustomers(c);
 	setStations(s);
 	setMaxTime(mt);
@@ -25,8 +25,8 @@ void Instance::setStations(int s) {	stations = s; }
 void Instance::setMaxTime(double mt) {	maxTime = mt; }
 void Instance::setMaxDistance(double md) {	maxDistance = md; }
 void Instance::setSpeed(double sp) {	speed = sp; }
-void Instance::setServiceTime(int st) { serviceTime = st; }
-void Instance::setRefuelTime(int rt) { refuelTime = rt; }
+void Instance::setServiceTime(double st) { serviceTime = st; }
+void Instance::setRefuelTime(double rt) { refuelTime = rt; }
 
 /**
  * Getters of Instance class

@@ -9,19 +9,19 @@ class Instance {
 		double maxTime;
 		double maxDistance;
 		double speed;
-		int serviceTime;
-		int refuelTime;
+		double serviceTime;
+		double refuelTime;
 	public:
 		// constructor
-		Instance(int c, int s, double mt, double md, double sp, int st, int rt);
+		Instance(int c, int s, double mt, double md, double sp, double st, double rt);
 		// setters
 		void setCustomers(int c);
 		void setStations(int s);
 		void setMaxTime(double mt);
 		void setMaxDistance(double md);
 		void setSpeed(double sp);
-		void setServiceTime(int st);
-		void setRefuelTime(int rt);
+		void setServiceTime(double st);
+		void setRefuelTime(double rt);
 		// getters
 		int getCustomers();
 		int getStations();
