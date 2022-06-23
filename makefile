@@ -9,6 +9,7 @@ CODE3 = src/node/node.cpp
 CODE4 = src/nodes/nodes.cpp
 CODE5 = src/filter/filter.cpp
 CODE6 = src/fc/fc.cpp
+CODE7 = src/vehicle/vehicle.cpp
 # Define object files
 OBJ1 = main.o
 OBJ2 = instance.o
@@ -16,14 +17,15 @@ OBJ3 = node.o
 OBJ4 = nodes.o
 OBJ5 = filter.o
 OBJ6 = fc.o
-ALLOBJ = $(OBJ1) $(OBJ2) $(OBJ3) $(OBJ4) $(OBJ5) $(OBJ6)
+OBJ7 = vehicle.o
+ALLOBJ = $(OBJ1) $(OBJ2) $(OBJ3) $(OBJ4) $(OBJ5) $(OBJ6) $(OBJ7)
 # Define executable
 EXE = main.out
 # To clean
 RM = rm -f
 
 # compile program
-all: instance node nodes filter fc main executable
+all: instance node nodes filter vehicle fc main executable
 
 # compile executable
 executable: $(ALLOBJ)
@@ -52,6 +54,10 @@ filter: $(CODE6)
 # compile fc module
 fc: $(CODE6)
 	$(CC) $(CFLAGS) $(CODE6)
+
+# compile vehicle module
+vehicle: $(CODE7)
+	$(CC) $(CFLAGS) $(CODE7)
 
 # run executable
 run:

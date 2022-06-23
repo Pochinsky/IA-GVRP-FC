@@ -66,24 +66,28 @@ double Filter::getTimeNodeToNode(Node node1, Node node2, double speed) {
 	return distance/speed;
 }
 
-bool Filter::enoughTimeNodeToNode(Node node1, Node node2, double currentTimeAvailable, double speed) {
+bool Filter::enoughTimeNodeToNode(
+	Node node1, Node node2, double currentTimeAvailable, double speed, double serviceTime, double refuelTime
+) {
 	double timeNodeToNode = getTimeNodeToNode(node1, node2, speed);
+	double timeNeed;
+	if (node2.getType() == 'f') timeNeed = timeNodeToNode + refuelTime;
 	if (timeNodeToNode <= currentTimeAvailable) return true;
 	else return false;
 }
 
-void Filter::filterSearchSpace(double currentTimeAvailable, double currentTankAvailable, double speed) {
+void Filter::filterSearchSpace(double currentTimeAvailable, double currentTankAvailable, double speed, double serviceTime, double refuelTime) {
 	for (auto& node: searchSpace) {
 		bool changes = false;
 		// check enough service time available to back to depot
-		if (!enoughTimeNodeToNode(node,depot,currentTimeAvailable, speed)) {
+		if (!enoughTimeNodeToNode(node,depot,currentTimeAvailable, speed,serviceTime, refuelTime)) {
 			setNotFilterSearchSpace(removeElementById(getNotFilterSearchSpace(), node.getId()));
 			changes = true;
 		}
 		// check enough service time available to go to refuel station
 		if (!changes) {
 			for (auto& notFilterNode: getNotFilterSearchSpace()) {
-				if (!enoughTimeNodeToNode(node,notFilterNode,currentTimeAvailable, speed)) {
+				if (!enoughTimeNodeToNode(node,notFilterNode,currentTimeAvailable, speed,serviceTime, refuelTime)) {
 					setNotFilterSearchSpace(removeElementById(getNotFilterSearchSpace(), node.getId()));
 					changes = true;
 				}
@@ -107,7 +111,7 @@ void Filter::filterSearchSpace(double currentTimeAvailable, double currentTankAv
 		}
 		if (!changes) {
 			// check enough service time available to go from currentNode to refuelNode
-			if (!enoughTimeNodeToNode(node,currentNode,currentTimeAvailable,speed)) {
+			if (!enoughTimeNodeToNode(node,currentNode,currentTimeAvailable,speed,serviceTime, refuelTime)) {
 				setNotFilterSearchSpace(removeElementById(getNotFilterSearchSpace(),node.getId()));
 				changes = true;
 			}

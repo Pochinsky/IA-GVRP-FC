@@ -7,13 +7,13 @@ class Filter {
 		vector<Node> notFilterSearchSpace;
 		Node depot;
 		Node currentNode;
-		double getTimeNodeToNode(Node node1, Node node2, double speed);
 		double haversineFormula(
 			double r, double longitude1, double longitude2, double latitude1, double latitude2
 		);
-		double getDistanceNodeToNode(Node node1, Node node2);
 		bool enoughTankNodeToNode(Node node1, Node node2, double currentTankAvailable);
-		bool enoughTimeNodeToNode(Node node1, Node node2, double currentTimeAvailable, double speed);
+		bool enoughTimeNodeToNode(
+			Node node1, Node node2, double currentTimeAvailable, double speed, double serviceTime, double refuelTime
+		);
 	public:
 		// constructor
 		Filter(
@@ -33,5 +33,9 @@ class Filter {
 		Node getDepot();
 		Node getCurrentNode();
 
-		void filterSearchSpace(double currentTimeAvailable, double currentTankAvailable, double speed);
+		double getDistanceNodeToNode(Node node1, Node node2);
+		double getTimeNodeToNode(Node node1, Node node2, double speed);
+		void filterSearchSpace(
+			double currentTimeAvailable, double currentTankAvailable, double speed, double serviceTime, double refuelTime
+		);
 };
