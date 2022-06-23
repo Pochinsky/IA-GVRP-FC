@@ -2,7 +2,25 @@
 
 using namespace std;
 
+/**
+ * @brief Clase Instance para almacenar la informacion
+ * 				la instancia
+ * 
+ */
 class Instance {
+	/**
+	 * @brief Atributos
+	 * 
+	 * customers		-	numero de clientes
+	 * stations			-	numero de estaciones de recarga
+	 * maxTime			-	tiempo de maximo de servicio
+	 * maxDistance	-	maxima distancia a recorrer al
+	 * 								tener estanque lleno
+	 * speed				-	velocidad constante
+	 * serviceTime	-	tiempo de servicio al cliente
+	 * refuelTime		-	tiempo de recarga de combustible
+	 * 
+	 */
 	private:
 		int customers;
 		int stations;
@@ -32,4 +50,11 @@ class Instance {
 		int getRefuelTime();
 };
 
+/**
+ * @brief Extrae la informacion de la instancia
+ * 				desde el archivo
+ * 
+ * @param fileName 	Nombre del archivo
+ * @return Instance Informacion de la instancia
+ */
 Instance extractInstanceData(string fileName);

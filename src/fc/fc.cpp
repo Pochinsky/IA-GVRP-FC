@@ -5,9 +5,6 @@
 
 using namespace std::chrono;
 
-/**
- * Forward checking algorithm
- */
 void forwardChecking(
 	double maxTime,
 	double maxDistance,
@@ -18,13 +15,13 @@ void forwardChecking(
 	vector<Node> refuelNodes,
 	vector<Node> customerNodes
 ) {
-	// solution variables
+	// Variables a usar para construir la solucion
 	double solutionQuality = 0; // [mile]
-	int costumersAttended  = 0;
+	int customersAttended  = 0;
 	int nVehicles					 = 1;
 	Vehicle currentVehicle(nVehicles,0.0,0.0,0.0);
 	vector<Vehicle> allVehicles;
-	// helpers variables
+	// Variables 'helpers'
 	double currentTimeAvailable     = maxTime;
 	double currentTankAvailable     = maxDistance;
 	Node currentNode						    = depot;
@@ -32,37 +29,39 @@ void forwardChecking(
 	vector<Node> notFilterCustomers = customerNodes;
 	vector<Filter> memoryRefuel;
 	vector<Filter> memoryCustomers;
-	// forward checking in action
+	// Ejecucion de forward checking
 	while (true) {
-		// 1. filter
+		// 1. Filtrar
 		Filter refuel(refuelNodes,notFilterRefuel,depot,currentNode);
 		refuel.filterSearchSpace(currentTimeAvailable,currentTankAvailable,speed,serviceTime,refuelTime);
 		Filter customers(customerNodes,notFilterCustomers,depot,currentNode);
 		customers.filterSearchSpace(currentTimeAvailable,currentTankAvailable,speed,serviceTime,refuelTime);
-		// 2. check empty domain
+		// 2. Chequear dominio vacio
 		if (customers.getNotFilterSearchSpace().empty() && refuel.getNotFilterSearchSpace().empty()) {
-			// 2.a. go back
-
+			// 2.a. Go back
 		}
 		else if (!customers.getNotFilterSearchSpace().empty()) {
-			// 3.a. choice a customer node and set parameters for new iteration
+			// 3.a. Elegir un nodo cliente y establecer parametros para la nueva iteracion
 			currentNode				 = customers.getNotFilterSearchSpace().front();
-			// save domains
+			// Guardar dominios
 			notFilterCustomers = customers.getNotFilterSearchSpace();
 			notFilterRefuel 	 = refuel.getNotFilterSearchSpace();
 			vector<Node> copyOfNotFilterCustomers = notFilterCustomers;
 			copyOfNotFilterCustomers.erase(copyOfNotFilterCustomers.begin());
 			customers.setNotFilterSearchSpace(copyOfNotFilterCustomers);
 			notFilterCustomers = customers.getNotFilterSearchSpace();
-			// memorize domains
+			// Memorizar dominios
 			memoryCustomers.push_back(customers);
 			memoryRefuel.push_back(refuel);
-			// update tank available
+			// Actualizar nivel del estanque
 			currentTankAvailable -= refuel.getDistanceNodeToNode(customers.getCurrentNode(),currentNode);
-			// update time available
+			// Actualizar tiempo de servicio restante
 			currentTimeAvailable -= customers.getTimeNodeToNode(customers.getCurrentNode(),currentNode,speed);
 			currentTimeAvailable -= serviceTime;
-			// update vehicle data
+			// Actualizar la calidad de la solucion
+			solutionQuality += customers.getDistanceNodeToNode(customers.getCurrentNode(),currentNode);
+			customersAttended++;
+			// Actualizar los datos del vehiculo
 			currentVehicle.setDistanceTraveled(
 				currentVehicle.getDistanceTraveled()+customers.getDistanceNodeToNode(customers.getCurrentNode(),currentNode)
 			);
@@ -71,26 +70,26 @@ void forwardChecking(
 			);
 		}
 		else {
-			// 3.b. choice a refuel and set parameters for new iteration
+			// 3.b. Elegir un nodo estacion de recarga y establecer parametros para la nueva iteracion
 			currentNode				 = refuel.getNotFilterSearchSpace().front();
-			// save domains
+			// Guardar dominios
 			notFilterCustomers = customers.getNotFilterSearchSpace();
 			notFilterRefuel 	 = refuel.getNotFilterSearchSpace();
 			vector<Node> copyOfNotFilterRefuel = notFilterRefuel;
 			copyOfNotFilterRefuel.erase(copyOfNotFilterRefuel.begin());
 			refuel.setNotFilterSearchSpace(copyOfNotFilterRefuel);
 			notFilterRefuel = refuel.getNotFilterSearchSpace();
-			// memorize domains
+			// Memorizar dominios
 			memoryCustomers.push_back(customers);
 			memoryRefuel.push_back(refuel);
-			// udpate tank available
+			// Actualizar nivel del estanque
 			currentTankAvailable = maxDistance;
-			// update time available
+			// Actualizar tiempo de servicio restante
 			currentTimeAvailable -= refuel.getTimeNodeToNode(refuel.getCurrentNode(),currentNode,speed);
 			currentTimeAvailable -= refuelTime;
-			// update solution quality
+			// Actualizar la calidad de la solucion
 			solutionQuality += refuel.getDistanceNodeToNode(refuel.getCurrentNode(),currentNode);
-			// update vehicle data
+			// Actualizar los datos del vehiculo
 			currentVehicle.setDistanceTraveled(
 				currentVehicle.getDistanceTraveled()+refuel.getDistanceNodeToNode(refuel.getCurrentNode(),currentNode)
 			);

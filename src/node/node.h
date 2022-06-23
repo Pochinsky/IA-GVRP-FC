@@ -1,4 +1,17 @@
+/**
+ * @brief Clase Node para representar un nodo
+ * 
+ */
 class Node {
+	/**
+	 * @brief Atributos
+	 * 
+	 * id					-	id del nodo
+	 * type				-	tipo de nodo (d=deposito,f=refuel_station,c=customer)
+	 * longitude	-	coordenada longitud
+	 * latitude		-	coordenada latitude
+	 * 
+	 */
 	private:
 		int id;
 		char type;
